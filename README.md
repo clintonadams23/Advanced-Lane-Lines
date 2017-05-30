@@ -10,9 +10,7 @@
 
 ### Camera Calibration
 
-#### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
-
-The code for this step is contained in the sixth code cell of the IPython notebook located in "advanced_lane_finding.ipynb".  
+The code for this step is contained in the sixth code cell of the IPython notebook located in "advanced_lane_finding.ipynb" in the Camera_Calibration class.  
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
@@ -22,12 +20,12 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ### Pipeline (single images)
 
-#### 1. Correct Distortion
+#### 1. Correct distortion
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 ![alt text][image2]
 
-#### 2. Using color transforms, gradients or other methods to create a thresholded binary image
+#### 2. Use color transforms, and gradients to create a thresholded binary image
 
 I used a combination of color and gradient thresholds to generate a binary image. The code for this is contained in the apply_threshold function. Here's an example of the output for this step. 
 
@@ -48,7 +46,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 ![alt text][image4]
 
-#### 4. Identified lane-line pixels and fit their positions to a polynomial
+#### 4. Identify lane-line pixels and fit their positions to a polynomial
 
 Then I used a sliding window histgram to find high itensity points in the binary image, and fit my lane lines with a 2nd order polynomial kinda like this:
 
@@ -78,6 +76,6 @@ Here's a [link to my video result](./test_videos_output/project_video.mp4)
 
 ### Discussion
 
-#### Problems / Potential Improvements
+#### Problems / potential improvements
 
 I faced signifant challenges with shadows and lighting. Optimizing the gradient and s channel thresholds helped in this area. Filtering out undesirable images was also helpful. To make it more robust, more optimization can be done in the selection of the color space and thresholds. Another possible improvement would be to use the record of polynomial fits to find a rate of change in fits from frame to frame, and reject rapid changes. 
